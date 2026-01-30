@@ -94,3 +94,21 @@ julia> palindromes(6)      # Maximum chain of 6-bit words has length 12, not 8
 * `word_gen(b)` returns a generator all `b`-bit words in numerical order.
 * `flip_word_gen(b)` returns a generator of all `b`-bit words after having been flipped.
 * `longest_monotone(list)` returns a pair of sublists of `list`: a longest decreasing sublist and a longest increasing sublist. 
+
+### More other functions
+
+* `conj_c(b)` returns the conjectured length of a maximum chain for `b`-bit words.
+* `conj_a(b)` returns the conjectured length of a maximum antichain for `b`-bit words.
+* `middle(list)` gives the middle entry in an odd-length list. Why? The antichains are conjectured to have odd length (except $b=2$), so it's interesting to look at the middle element. 
+```julia
+julia> for b=3:10; anti = max_antichain(b); println(middle(anti)); end
+010
+0110
+01010
+011110
+0101010
+01111110
+010101010
+0111111110
+```
+
