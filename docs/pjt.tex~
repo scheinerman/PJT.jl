@@ -1,0 +1,9 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{newtx}
+\begin{document}
+    \begin{center}
+        Paul's Poset Poser
+    \end{center}
+\end{document}

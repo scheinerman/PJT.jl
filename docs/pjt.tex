@@ -1,0 +1,98 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{newtx}
+\usepackage[margin=1.25in]{geometry}
+
+\DeclareMathOperator{\val}{val}
+
+\newtheorem{conj}{Conjecture}
+\newtheorem{prop}[conj]{Proposition}
+
+\begin{document}
+
+\begin{center}
+  \textsc{\large
+    Paul's Poset Poser
+  }
+\end{center}
+
+\begin{itemize}
+\item For a positive integer $b$ let $W_b$ be the set of all
+  length-$b$ binary words.
+
+\item
+  For $w \in W_b$, let $\val w$ be the integer represented in binary
+  by $w$; that is
+  \[
+  \val w = \sum_{i=1}^b w_i 2^{b-i} .
+  \]
+  For example, $\val (1,1,0,1) = 1101_{\textsc{two}} = 13$.
+
+\item For $v,w \in W_b$, we have $v<w$ exactly when $\val v < \val w$.
+
+\item For $w \in W_b$, let $\rho(w)$ be the \emph{reversal} of
+  $w$. That is $$\rho(d_1,d_2,\ldots,d_b) = (d_b,d_{b-1},\ldots,d_1).$$
+
+\item A \emph{chain} is a sequence of words $w_1,w_2,\ldots,w_n\in
+  W_b$ such that $w_1 < w_2 < \cdots <w_n$ and $\rho(w_1) < \rho(w_2) <
+  \cdots < \rho(w_n)$. 
+
+\item An \emph{antichain} is a sequence of words $w_1,w_2,\ldots,w_n\in
+  W_b$ such that $w_1 < w_2 < \cdots < w_n$ and $\rho(w_1) > \rho(w_2) >
+  \cdots > \rho(w_n)$. 
+
+\item Let $c(b)$ be the size of a maximum chain in $W_b$ and $a(b)$ be
+  the size of a maximum antichain in $W_b$. 
+
+\item If $v$ and $w$ are binary words, $vw$ is their concatenation. 
+\end{itemize}
+
+\begin{conj}
+  For a positive integer $b$,
+  \[
+  c(b) = 
+  \begin{cases}
+    3\cdot 2^{b/2-1} & \text{if $b$ is even and} \\
+    2^{(b+1)/2} & \text{if $b$ is odd}.
+  \end{cases}
+  \]
+\end{conj}
+
+\begin{conj}
+  For a positive integer $b$, $a(b) = c(b)-1$. 
+\end{conj}
+
+
+\newpage
+
+\begin{prop} \label{prop:c-lower}
+    For a positive integer $b$,
+  \[
+  c(b) \ge
+  \begin{cases}
+    3\cdot 2^{b/2-1} & \text{if $b$ is even and} \\
+    2^{(b+1)/2} & \text{if $b$ is odd}.
+  \end{cases}
+  \]
+\end{prop}
+
+\begin{proof}[Sketch of Proof]
+  Observe that if $w_1,w_2,\ldots,w_n$ is a chain in $W_b$, then 
+  $$0w_10, 0w_20, \ldots, 0w_n0, 1w_11, 1w_21, \ldots 1w_n1$$ is a chain
+  in $W_{b+2}$ that is twice as long. 
+
+  We see that $c(1)=2$ because $0,1$ is a chain and that $c(2)=3$
+  because $00,01,11$ is a chain (and easy to check we cannot make a
+  longer one). 
+
+  The result now follows by induction on $b$. 
+\end{proof}
+
+
+\begin{proof}[Alternative sketch proof for odd $b$]
+  The palindromes of $W_b$ form a chain. When $b$ is odd, the number
+  of palindromes is $2^{(b+1)/2}$. 
+\end{proof}
+
+\end{document}
