@@ -93,4 +93,4 @@ julia> palindromes(6)      # Maximum chain of 6-bit words has length 12, not 8
 * `width(b)` returns the length of a maximum antichain of `b`-bit words. 
 * `word_gen(b)` returns a generator all `b`-bit words in numerical order.
 * `flip_word_gen(b)` returns a generator of all `b`-bit words after having been flipped.
-* `longest_monotone(list)` returns a pair of sublists of `list`: a longest decreasing list and a longest increasing list. 
+* `longest_monotone(list)` returns a pair of sublists of `list`: a longest decreasing sublist and a longest increasing sublist. 
