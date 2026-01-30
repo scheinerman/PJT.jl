@@ -93,12 +93,12 @@ end
 
 
 """
-	longest_monotone(words::Vector{T}) where T <: Union{Number, Word}
+	longest_monotone(words::Vector{T}) where T
 
-Given a list of words, `words`, return the longest increasing [nondecreasing]
-and longest decreasing [nonincreasing] subsequences.
+Given a list of words, `words`, return the longest decreasing [nonincreasing]
+and longest increasing [nondecreasing] subsequences.
 """
-function longest_monotone(words::Vector{T}) where T <: Union{Number, Word}
+function longest_monotone(words::Vector{T}) where T
 	n = length(words)
 	if n < 2
 		return words, words
@@ -163,15 +163,6 @@ Create a list of all `b`-bit words from 0000 to 1111 after flipping.
 """
 function flip_word_gen(b::Int)
 	(flip(w) for w in word_gen(b))
-end
-
-"""
-	flip_list(b::Int)
-
-Return the flip of the numbers `0` through `2^b-1`.
-"""
-function flip_list(b::Int)::Vector{Int}
-	return [flip(x, b) for x in collect(0:(2^b-1))]
 end
 
 """
