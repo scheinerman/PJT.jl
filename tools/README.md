@@ -45,3 +45,16 @@ julia> [is_antichain(a) for a in acd]
  1
  1
 ```
+
+## `simple_posets.jl`
+
+`make_simple_poset(b)` creates a `SimplePoset{Word}` of the `b`-bit words. 
+
+```
+julia> P = make_simple_poset(4)
+SimplePoset (16 elements)
+
+julia> draw(P)
+```
+
+![](b4.png)
