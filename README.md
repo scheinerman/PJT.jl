@@ -1,6 +1,6 @@
 # PJT
 
-Code for Paul Tanenbaum's poset problem.
+Code for Paul Tanenbaum's poset problem. Additional methods in the `tools` folder. 
 
 
 ## Definitions
@@ -96,7 +96,7 @@ julia> palindromes(6)      # Maximum chain of 6-bit words has length 12, not 8
 * `longest_monotone(list)` returns a pair of sublists of `list`: a longest decreasing sublist and a longest increasing sublist. 
 * `is_chain(list)` determines if `list` is a chain (ascending list of `Word`s).
 * `is_antichain(list)` determines if `list` is an antichain (descending list of `Word`s).
-* `complement(w)` forms a bitwise complement of `x` (swap 0s and 1s).
+* `~w` forms a bitwise complement of `x` (swap 0s and 1s).
 
 ### More other functions
 
