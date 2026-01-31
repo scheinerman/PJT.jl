@@ -3,10 +3,12 @@ module PJT
 export Word
 
 
-export flip, longest_monotone, value
+import Base: (~)
+export flip, longest_monotone, value, (~)
 
 export word_gen, flip_word_gen
 export max_chain, max_antichain, height, width
+export is_chain, is_antichain
 export recursive_chain, palindromes, middle
 
 
@@ -33,6 +35,10 @@ end
 
 
 value(w::Word) = w.val
+
+function (~)(w::Word)
+    return Word(w.bits, 2^(w.bits)-w.val-1)
+end
 
 import Base.Multimedia.display
 display(w::Word) = println(w.str)
@@ -208,6 +214,27 @@ Create a longest decreasing sequence of flipped words with `b` bits.
 function max_antichain(b::Int)
 	list = collect(flip_word_gen(b))
 	longest_monotone(list)[1]
+end
+
+
+"""
+    is_chain(list::Vector{Word})::Bool
+
+Determine if `list` is a chain of words (ascending).
+"""
+function is_chain(list::Vector{Word})::Bool
+	x = sort(list)
+	return flip.(x)==sort(flip.(x))
+end
+
+"""
+    is_antichain(list::Vector{Word})::Bool
+
+Determine if `list` is an antichain of words (descending).
+"""
+function is_antichain(list::Vector{Word})::Bool
+	x = sort(list)
+	return flip.(x) == sort(flip.(x); rev=true)
 end
 
 
