@@ -46,9 +46,10 @@ julia> [is_antichain(a) for a in acd]
  1
 ```
 
-## `simple_posets.jl`
+## `simple_poset.jl`
 
-`make_simple_poset(b)` creates a `SimplePoset{Word}` of the `b`-bit words. 
+This file provides that function
+`make_simple_poset(b)` to create a `SimplePoset{Word}` of the `b`-bit words. 
 
 ```
 julia> P = make_simple_poset(4)
