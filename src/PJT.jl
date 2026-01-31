@@ -2,9 +2,7 @@ module PJT
 
 export Word
 
-
-import Base: (~)
-export flip, longest_monotone, value, (~)
+export flip, longest_monotone, value, complement
 
 export word_gen, flip_word_gen
 export max_chain, max_antichain, height, width
@@ -36,7 +34,12 @@ end
 
 value(w::Word) = w.val
 
-function (~)(w::Word)
+"""
+    complement(w::Word)::Word
+
+Swap 0s and 1s in `w`.
+"""
+function complement(w::Word)::Word
     return Word(w.bits, 2^(w.bits)-w.val-1)
 end
 
