@@ -22,3 +22,22 @@ function make_simple_poset(b::Int)
     end
     return P
 end
+
+
+"""
+    rank_decomposition(b::Int)
+
+Return a decomposition of the `b`-bit word poset by layers from the bottom up.
+"""
+function rank_decomposition(b::Int)
+    P = make_simple_poset(b)
+    result = Vector{Vector{Word}}()
+    while length(P.D.V) > 0
+        bottoms = minimals(P)
+        push!(result, bottoms)
+        for v in bottoms
+            delete!(P,v)
+        end
+    end
+    return result
+end

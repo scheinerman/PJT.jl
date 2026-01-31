@@ -59,3 +59,16 @@ julia> draw(P)
 ```
 
 ![](b4.png)
+
+We also provide `rank_decomposition(b)` which decomposes the `b`-bit word poset into layers.
+```
+julia> rank_decomposition(4)
+6-element Vector{Vector{Word}}:
+ [0000]
+ [0001, 0010, 0100, 1000]
+ [0011, 0101, 0110, 1010, 1100]
+ [0111, 1001, 1110]
+ [1011, 1101]
+ [1111]
+```
+These appear to be good antichain decompositions.
