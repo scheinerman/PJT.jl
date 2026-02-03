@@ -2,7 +2,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{newtx}
-\usepackage[margin=1.25in]{geometry}
+\usepackage[margin=1.5in]{geometry}
 
 \DeclareMathOperator{\val}{val}
 
@@ -29,18 +29,19 @@
   \]
   For example, $\val (1,1,0,1) = 1101_{\textsc{two}} = 13$.
 
-\item For $v,w \in W_b$, we have $v<w$ exactly when $\val v < \val w$.
-
 \item For $w \in W_b$, let $\rho(w)$ be the \emph{reversal} of
-  $w$. That is $$\rho(d_1,d_2,\ldots,d_b) = (d_b,d_{b-1},\ldots,d_1).$$
+  $w$. That is $$\rho(d_1,d_2,\ldots,d_b) =
+  (d_b,d_{b-1},\ldots,d_1).$$
 
-\item A \emph{chain} is a sequence of words $w_1,w_2,\ldots,w_n\in
-  W_b$ such that $w_1 < w_2 < \cdots <w_n$ and $\rho(w_1) < \rho(w_2) <
-  \cdots < \rho(w_n)$. 
+\item For words $v,w\in W_b$, define $v \prec w$ provided $\val v <
+  \val w$ and $\val \rho(v) < \val \rho(w)$. Note that $(W_b,\prec)$
+  is a poset. 
 
-\item An \emph{antichain} is a sequence of words $w_1,w_2,\ldots,w_n\in
-  W_b$ such that $w_1 < w_2 < \cdots < w_n$ and $\rho(w_1) > \rho(w_2) >
-  \cdots > \rho(w_n)$. 
+\item A \emph{chain} is a subset of $W_b$ containing
+  pairwise comparable words and an \emph{antichain} is a subset of
+  $W_b$ containing pairwise incomparable words. 
+
+
 
 \item Let $c(b)$ be the size of a maximum chain in $W_b$ and $a(b)$ be
   the size of a maximum antichain in $W_b$. 
@@ -78,13 +79,16 @@
 \end{prop}
 
 \begin{proof}[Proof sketch]
-  Observe that if $w_1,w_2,\ldots,w_n$ is a chain in $W_b$, then 
-  $$0w_10, 0w_20, \ldots, 0w_n0, 1w_11, 1w_21, \ldots 1w_n1$$ is a chain
-  in $W_{b+2}$ that is twice as long. 
+  Observe that if $w_1\prec w_2 \prec \cdots \prec w_n$ is a chain in $W_b$, then 
+  $$
+  0w_10 \prec 0w_20 \prec \cdots \prec 0w_n0 \prec 1w_11\prec
+  1w_21\prec \cdots \prec 1w_n1
+  $$ is a chain
+  in $W_{b+2}$ that is twice as long.
 
-  We see that $c(1)=2$ because $0,1$ is a chain and that $c(2)=3$
-  because $00,01,11$ is a chain (and easy to check we cannot make a
-  longer one). 
+  We see that $c(1)=2$ because $0\prec1$ is a chain in $W_1$ and that
+  $c(2)=3$ because $00\prec01\prec11$ is a chain in $W_2$ (and easy to
+  check we cannot make a longer one).
 
   The result now follows by induction on $b$. 
 \end{proof}
@@ -92,7 +96,8 @@
 
 \begin{proof}[Alternative proof sketch for odd $b$]
   The palindromes of $W_b$ form a chain. When $b$ is odd, the number
-  of palindromes is $2^{(b+1)/2}$. 
+  of palindromes is $2^{(b+1)/2}$. This argument doesn't work for
+  even $b$.
 \end{proof}
 
 \end{document}
