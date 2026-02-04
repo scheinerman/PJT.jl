@@ -1,13 +1,14 @@
 module PJT
 
 export Word
-import Base: (~)
+import Base: (~), xor
 export flip, longest_monotone, value, (~)
 
 export word_gen, flip_word_gen
 export max_chain, max_antichain, height, width
 export is_chain, is_antichain
-export recursive_chain, palindromes, middle
+export recursive_chain, palindromes, middle, xor
+export binary_string
 
 
 export conj_a, conj_c
@@ -60,7 +61,7 @@ end
 
 
 import Base.isless
-isless(v::Word, w::Word) = v.val < w.val
+isless(v::Word, w::Word) = (v.val < w.val) && (flip(v).val < flip(w).val)
 
 
 
@@ -317,6 +318,21 @@ function middle(list::Vector{T}) where T
 
 	i = (n+1)÷2
 	return list[i]
+end
+
+"""
+    xor(v::Word, w::Word)::Word
+
+Find the `xor` of two words.
+"""
+function xor(v::Word, w::Word)::Word
+	b = v.bits
+	if b ≠ w.bits
+		error("Words $v and $w do not have the same number of bits")
+	end
+
+	x = xor(value(v), value(w))
+	return Word(b,x)
 end
 
 end # end module PJT

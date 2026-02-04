@@ -1,0 +1,106 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{newtx}
+\usepackage[margin=1.5in]{geometry}
+
+\DeclareMathOperator{\val}{val}
+
+\newtheorem{conj}{Conjecture}
+\newtheorem{prop}[conj]{Proposition}
+
+\begin{document}
+
+\begin{center}
+  \textsc{\large
+    Evan's Conjecture
+  }
+\end{center}
+
+Let $v$ be a $b$-bit word. 
+\begin{itemize}
+\item A \emph{Type I} transformation replaces a $0$ in $v$ with a $1$.
+
+  Example: $001\underline0 101 \to 001 \underline1 101$. 
+
+\item A \emph{Type H} transformation replaces a substring in $v$ of
+  the form\footnote{The substring begins and ends with a $0$ and has
+    one or more consecutive $1$s in between.}  $011\dots10$ with its
+  complement, i.e., $100\ldots01$.
+
+  Example: $0\underline{0110}01 \to 0 \underline{1001} 01$.
+\end{itemize}
+
+Recall that, in a poset, $v$ is \emph{covered by} $w$ provided $v
+\prec w$ and there is no element $x$ with $v \prec x \prec w$. 
+
+\begin{conj}
+  For $v,w \in W_b$, $v$ is covered by $w$ if and only if $w$ is
+  obtained from $v$ by a Type I or Type H transformation.
+\end{conj}
+
+In particular, if $w_1 \prec w_2 \prec \cdots \prec w_t$ is a maximum
+chain in $W_b$, then each $w_{i+1}$ is obtained from $w_i$ by a Type~I
+or a Type~H transformation. 
+
+Conjecture is well-supported by computer evidence.
+
+Some chain examples:
+
+\small
+
+\begin{verbatim}
+julia> show_transformations(palindromes(7))
+0000000 → 0001000       Type I 
+0001000 → 0010100       Type H
+0010100 → 0011100       Type I 
+0011100 → 0100010       Type H
+0100010 → 0101010       Type I 
+0101010 → 0110110       Type H
+0110110 → 0111110       Type I 
+0111110 → 1000001       Type H
+1000001 → 1001001       Type I 
+1001001 → 1010101       Type H
+1010101 → 1011101       Type I 
+1011101 → 1100011       Type H
+1100011 → 1101011       Type I 
+1101011 → 1110111       Type H
+1110111 → 1111111       Type I 
+
+julia> show_transformations(max_chain(7))
+0000000 → 0010000       Type I 
+0010000 → 0011000       Type I 
+0011000 → 0100100       Type H
+0100100 → 0110100       Type I 
+0110100 → 0111100       Type I 
+0111100 → 1000010       Type H
+1000010 → 1010010       Type I 
+1010010 → 1011010       Type I 
+1011010 → 1011110       Type I 
+1011110 → 1100001       Type H
+1100001 → 1101001       Type I 
+1101001 → 1101101       Type I 
+1101101 → 1110011       Type H
+1110011 → 1111011       Type I 
+1111011 → 1111111       Type I 
+
+julia> show_transformations(recursive_chain(7))
+0000000 → 0001000       Type I 
+0001000 → 0010100       Type H
+0010100 → 0011100       Type I 
+0011100 → 0100010       Type H
+0100010 → 0101010       Type I 
+0101010 → 0110110       Type H
+0110110 → 0111110       Type I 
+0111110 → 1000001       Type H
+1000001 → 1001001       Type I 
+1001001 → 1010101       Type H
+1010101 → 1011101       Type I 
+1011101 → 1100011       Type H
+1100011 → 1101011       Type I 
+1101011 → 1110111       Type H
+1110111 → 1111111       Type I
+\end{verbatim}
+
+
+\end{document}
