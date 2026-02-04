@@ -23,6 +23,8 @@ function max_chain_transforms(b::Int)
     show_transformations(cc)
 end
 
+
+
 function show_transformations(cc::Vector{Word})
    ncc = length(cc)
 

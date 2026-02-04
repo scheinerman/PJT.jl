@@ -71,7 +71,7 @@ end
 Return a decomposition of the `b`-bit word poset by layers from the bottom up.
 """
 function rank_decomposition(b::Int)
-	P = make_simple_poset(b)
+	P = make_poset(b)
 	result = Vector{Vector{Word}}()
 	while length(P.D.V) > 0
 		bottoms = minimals(P)
@@ -144,12 +144,12 @@ function type_H(v::Word, w::Word)::Bool
 	#@show v_digs
 
 	if v_digs[frst]==1 || v_digs[lst]==1
-		return false 
+		return false
 	end
 
-	for i=frst+1:lst-1 
+	for i ∈ (frst+1):(lst-1)
 		if v_digs[i] == 0
-			return false 
+			return false
 		end
 	end
 
@@ -165,12 +165,12 @@ function type_H(v::Word, w::Word)::Bool
 end
 
 """
-    has_type(v::Word, w::Word)::Bool
+	has_type(v::Word, w::Word)::Bool
 
 Return `true` if the transformation from `v` to `w` is either type I or H. 
 """
 function has_type(v::Word, w::Word)::Bool
-	return type_I(v,w) || type_H(v,w)
+	return type_I(v, w) || type_H(v, w)
 end
 """
 	show_type(v::Word, w::Word)
@@ -208,4 +208,40 @@ function is_covered_by(v::Word, w::Word)::Bool
 	end
 
 	return true
+end
+
+
+"""
+    all_covers(v::Word)
+
+Return a list of all words that cover `v` in its poset.
+"""
+function all_covers(v::Word)
+	b = v.bits
+	return [w for w in word_gen(b) if is_covered_by(v, w)]
+end
+
+
+
+"""
+    all_cover_types(v::Word)
+
+List all the covers of `v` and the transformation needed to get there.
+"""
+function all_cover_types(v::Word)
+	for w in all_covers(v)
+		show_type(v,w)
+	end
+end
+
+"""
+    all_cover_types(b::Int)
+
+Compute `all_cover_types` for all elements of the poset. 
+"""
+function all_cover_types(b::Int)
+	for v in word_gen(b)
+		all_cover_types(v)
+		println("-"^30)
+	end
 end

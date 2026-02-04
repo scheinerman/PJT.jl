@@ -103,12 +103,12 @@ end
 
 
 """
-	longest_monotone(words::Vector{T}) where T
+    longest_monotone(words::Vector{Int})
 
 Given a list of words, `words`, return the longest decreasing [nonincreasing]
 and longest increasing [nondecreasing] subsequences.
 """
-function longest_monotone(words::Vector{T}) where T
+function longest_monotone(words::Vector{Int}) 
 	n = length(words)
 	if n < 2
 		return words, words
@@ -206,8 +206,9 @@ end
 Create a longest increasing sequence of flipped words with `b` bits. 
 """
 function max_chain(b::Int)
-	list = collect(flip_word_gen(b))
-	longest_monotone(list)[2]
+	list = value.(collect(flip_word_gen(b)))
+	up = longest_monotone(list)[2]
+	[Word(b,u) for u in up]
 end
 
 """
@@ -216,8 +217,9 @@ end
 Create a longest decreasing sequence of flipped words with `b` bits. 
 """
 function max_antichain(b::Int)
-	list = collect(flip_word_gen(b))
-	longest_monotone(list)[1]
+	list = value.(collect(flip_word_gen(b)))
+	dn = longest_monotone(list)[1]
+	[Word(b,d) for d in dn]
 end
 
 
