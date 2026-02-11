@@ -5,9 +5,12 @@
 \usepackage[margin=1.5in]{geometry}
 
 \DeclareMathOperator{\val}{val}
+\newcommand{\two}{\textsc{two}}
 
 \newtheorem{conj}{Conjecture}
+\newtheorem{corr}[conj]{Corrolary}
 \newtheorem{prop}[conj]{Proposition}
+\newtheorem{thm}[conj]{Theorem}
 
 \begin{document}
 
@@ -34,14 +37,92 @@ Let $v$ be a $b$-bit word.
 Recall that, in a poset, $v$ is \emph{covered by} $w$ provided $v
 \prec w$ and there is no element $x$ with $v \prec x \prec w$. 
 
-\begin{conj}
+
+\begin{prop}
+  Suppose $v,w\in W_b$ and $w$ is derived from $v$ by an I
+  transformation, than $v \prec w$.
+\end{prop}
+
+
+\begin{proof}
+  Let $v=(x,0,y)$ and $w=(x,1,y)$. Then $\val w = \val v + 2^k > \val
+  v$ for some $k$. Likewise, $\val\rho w = \val\rho v + 2^j > \val\rho
+  v$ for some $j$. Therefore $v \prec w$.
+\end{proof}
+
+\begin{prop}
+  Suppose $v,w\in W_b$ and $w$ is derived from $v$ by an H
+  transformation, than $v \prec w$.
+\end{prop}
+
+\begin{proof}
+  Let $v = (x,10\ldots01,y)$ and $w=(x,01\ldots1,y)$. Note that
+  $10\ldots01_\textsc{two} >01\ldots10_\two$ and therefore $\val w
+  >\val v$. Likewise, $\val \rho w > \val \rho v$. Therefore $v \prec
+  w$.  
+\end{proof}
+
+
+\begin{corr}
+  Let $v,w \in W_b$. If $w$ is obtained from $v$ by a series of I and
+  H transformations, then $v\preceq w$. \qed
+\end{corr}
+
+The interesting part is the converse.
+
+
+\begin{thm}
+  Let $v,w \in W_b$ with $v \prec w$. Then $w$ is obtained from $v$
+  by a sequence of I and H transformations. 
+\end{thm}
+
+\begin{proof}
+  The proof is by strong induction on $b$. It is easy to verify for
+  $W_1$, $W_2$, and $W_3$. Suppose the result has been shown for all
+  $W_i$ with $i<b$. 
+
+  Let $v,w \in W_b$.
+
+ 
+
+
+  \begin{itemize}
+  \item Case I: Suppose that the first bits of $v$ and $w$ are the
+    same, and the last bits of $v$ and $w$ are the same. That is
+    $v=(sxt)$ and $w=(syt)$ where $s,t\in\{0,1\}$. It follows that
+    $x\prec y$ in $W_{b-2}$ and therefore there is a sequence of H/I
+    transformations that convert $x$ to $y$ (by induction). The same
+    sequence converts $v$ to $w$. 
+
+    Note that we cannot have  $v=(1x0)$ and $w=(0y1)$ because $v\prec
+    w$. 
+
+  \item Case II: Suppose that $v=(0x1)$ and $w=(1y0)$. Suppose, for
+    the sake of contradiction, that there is no sequence of H/I
+    transformations that converts $v$ to $w$. Among all possible such
+    pairs $(v,w)$ choose one such that $\val y$ is smallest.
+
+    \textsc{This is where the new material will go.}
+
+
+  \end{itemize}
+  
+\end{proof}
+
+
+
+
+\begin{corr}
   For $v,w \in W_b$, $v$ is covered by $w$ if and only if $w$ is
-  obtained from $v$ by a Type I or Type H transformation.
-\end{conj}
+  obtained from $v$ by a Type I or Type H transformation.\qed
+\end{corr}
 
 In particular, if $w_1 \prec w_2 \prec \cdots \prec w_t$ is a maximum
 chain in $W_b$, then each $w_{i+1}$ is obtained from $w_i$ by a Type~I
 or a Type~H transformation. 
+
+
+\end{document}
 
 Conjecture is well-supported by computer evidence.
 
