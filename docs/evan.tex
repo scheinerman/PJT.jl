@@ -22,20 +22,17 @@
 
 Let $v$ be a $b$-bit word. 
 \begin{itemize}
-\item A \emph{Type I} transformation replaces a $0$ in $v$ with a $1$.
+\item A \emph{type I} transformation replaces a $0$ in $v$ with a $1$.
 
   Example: $001\underline0 101 \to 001 \underline1 101$. 
 
-\item A \emph{Type H} transformation replaces a substring in $v$ of
+\item A \emph{type H} transformation replaces a substring in $v$ of
   the form\footnote{The substring begins and ends with a $0$ and has
     one or more consecutive $1$s in between.}  $011\dots10$ with its
   complement, i.e., $100\ldots01$.
 
   Example: $0\underline{0110}01 \to 0 \underline{1001} 01$.
 \end{itemize}
-
-Recall that, in a poset, $v$ is \emph{covered by} $w$ provided $v
-\prec w$ and there is no element $x$ with $v \prec x \prec w$. 
 
 
 \begin{prop}
@@ -56,7 +53,7 @@ Recall that, in a poset, $v$ is \emph{covered by} $w$ provided $v
 \end{prop}
 
 \begin{proof}
-  Let $v = (x,10\ldots01,y)$ and $w=(x,01\ldots1,y)$. Note that
+  Let $v = (x,01\ldots10,y)$ and $w=(x,10\ldots01,y)$. Note that
   $10\ldots01_\textsc{two} >01\ldots10_\two$ and therefore $\val w
   >\val v$. Likewise, $\val \rho w > \val \rho v$. Therefore $v \prec
   w$.  
@@ -100,7 +97,7 @@ The interesting part is the converse.
   \item Case II: Suppose that $v=(0x1)$ and $w=(1y0)$. Suppose, for
     the sake of contradiction, that there is no sequence of H/I
     transformations that converts $v$ to $w$. Among all possible such
-    pairs $(v,w)$ choose one such that $\val y$ is smallest.
+    pairs $(v,w)$ choose one such that $\val w$ is smallest.
 
     \textsc{This is where the new material will go.}
 
@@ -111,15 +108,18 @@ The interesting part is the converse.
 
 
 
+Recall that, in a poset, $v$ is \emph{covered by} $w$ provided $v
+\prec w$ and there is no element $x$ with $v \prec x \prec w$. 
+
 
 \begin{corr}
   For $v,w \in W_b$, $v$ is covered by $w$ if and only if $w$ is
-  obtained from $v$ by a Type I or Type H transformation.\qed
+  obtained from $v$ by a type I or type H transformation.\qed
 \end{corr}
 
 In particular, if $w_1 \prec w_2 \prec \cdots \prec w_t$ is a maximum
-chain in $W_b$, then each $w_{i+1}$ is obtained from $w_i$ by a Type~I
-or a Type~H transformation. 
+chain in $W_b$, then each $w_{i+1}$ is obtained from $w_i$ by a type~I
+or a type~H transformation. 
 
 
 \end{document}
