@@ -7,10 +7,22 @@
 \DeclareMathOperator{\val}{val}
 \newcommand{\two}{\textsc{two}}
 
+\newcommand{\barv}{\bar{v}}
+\newcommand{\barw}{\bar{w}}
+
+\newcommand{\rhov}{\rho v}
+\newcommand{\rhow}{\rho w}
+
+\newcommand{\rhobarv}{\rho \barv}
+\newcommand{\rhobarw}{\rho \barw}
+
 \newtheorem{conj}{Conjecture}
 \newtheorem{corr}[conj]{Corrolary}
 \newtheorem{prop}[conj]{Proposition}
 \newtheorem{thm}[conj]{Theorem}
+
+\newcommand{\newthought}{%
+  \smallskip\centerline{\rule{2in}{0.5pt}}\smallskip}
 
 \begin{document}
 
@@ -20,7 +32,11 @@
   }
 \end{center}
 
-Let $v$ be a $b$-bit word. 
+Let $v$ be a $b$-bit word. Treat $v$ as a binary number to get its
+value. For example, $\val (1,1,0,0) = 1100_\two = 12$. We have $v\prec
+w$ exactly when $\val v < \val w$ and $\val \rhov < \val \rhow$.
+
+
 \begin{itemize}
 \item A \emph{type I} transformation replaces a $0$ in $v$ with a $1$.
 
@@ -78,31 +94,111 @@ The interesting part is the converse.
   $W_1$, $W_2$, and $W_3$. Suppose the result has been shown for all
   $W_i$ with $i<b$. 
 
-  Let $v,w \in W_b$.
+  Let $v,w \in W_b$. We consider the first and last bits of both
+  words, and break into cases. All told there are 16 possibilities:
+  Four possibilities for $v$: $(0,\barv,0)$, $(0,\barv,1)$,
+  $(1,\barv,0)$, and $(1,\barv,1)$.  And likewise for $w$.
 
+
+  Cases as follows:
+
+  \begin{enumerate}
+  \item $v=(0,\barv,0)$ and $w=(0,\barw,0)$: Induction on
+    $\barv\prec\barw$. 
+
+  \item $v=(0,\barv,0)$ and $w=(0,\barw,1)$: Cannot happen because 
+    $\rhov=(0,\rhobarv,0) \not\prec (1,\rhobarw,0) = \rhow$.
+
+
+  \item $v=(0,\barv,0)$ and $w=(1,\barw,0)$:
+
+
+  \item $v=(0,\barv,0)$ and $w=(1,\barw,1)$:
+
+    \newthought
+    
+  \item $v=(0,\barv,1)$ and $w=(0,\barw,0)$:
+
+
+  \item $v=(0,\barv,1)$ and $w=(0,\barw,1)$:
+
+
+  \item $v=(0,\barv,1)$ and $w=(1,\barw,0)$:
+
+
+  \item $v=(0,\barv,1)$ and $w=(1,\barw,1)$:
+
+    
+    \newthought
+
+  \item $v=(1,\barv,0)$ and $w=(0,\barw,0)$: 
+
+  \item $v=(1,\barv,0)$ and $w=(0,\barw,1)$: 
+
+  \item $v=(1,\barv,0)$ and $w=(1,\barw,0)$:
+
+  \item $v=(1,\barv,0)$ and $w=(1,\barw,1)$:
+
+    \newthought
+    
+  \item $v=(1,\barv,1)$ and $w=(0,\barw,0)$:
+
+
+  \item $v=(1,\barv,1)$ and $w=(0,\barw,1)$:
+
+
+  \item $v=(1,\barv,1)$ and $w=(1,\barw,0)$:
+
+
+  \item $v=(1,\barv,1)$ and $w=(1,\barw,1)$:
+
+
+
+
+
+  \end{enumerate}
+
+
+  % \textsf{OLD CASES}
  
 
 
-  \begin{itemize}
-  \item Case I: Suppose that the first bits of $v$ and $w$ are the
-    same, and the last bits of $v$ and $w$ are the same. That is
-    $v=(sxt)$ and $w=(syt)$ where $s,t\in\{0,1\}$. It follows that
-    $x\prec y$ in $W_{b-2}$ and therefore there is a sequence of H/I
-    transformations that convert $x$ to $y$ (by induction). The same
-    sequence converts $v$ to $w$. 
-
-    Note that we cannot have  $v=(1x0)$ and $w=(0y1)$ because $v\prec
-    w$. 
-
-  \item Case II: Suppose that $v=(0x1)$ and $w=(1y0)$. Suppose, for
-    the sake of contradiction, that there is no sequence of H/I
-    transformations that converts $v$ to $w$. Among all possible such
-    pairs $(v,w)$ choose one such that $\val w$ is smallest.
-
-    \textsc{This is where the new material will go.}
+  % \begin{itemize}
+  % \item Case I: Suppose that the first bits of $v$ and $w$ are the
+  %   same, and the last bits of $v$ and $w$ are the same. That is
+  %   $v=(s,\barv,t)$ and $w=(s,\barw,t)$ where
+  %   $s,t\in\{0,1\}$. [This covers 4 cases.]
 
 
-  \end{itemize}
+  %   It follows that $x\prec y$ in $W_{b-2}$ and therefore there is a
+  %   sequence of H/I transformations that convert $\barv$ to $\barw$
+  %   (by induction). The same sequence converts $v$ to $w$.
+
+    
+  % \item Case II: Suppose $v=(1,\barv,0)$ and $w=(0,\barw,t)$ with
+  %   $t\in\{0,1\}$. [2~cases] 
+
+  %   This cannot occur because it violates $v \prec w$. 
+
+ 
+  % \item Case III: Suppose $v=(s,\barv,1)$ and $w=(1,\barw,0)$ with
+  %   $s\in\{0,1\}$. [2~cases]
+
+  %   This cannot occur because $\rho v = (1,\rho\barv,s)$ and
+  %   $w=(0,\rho\barw,1)$, violating $v \prec w$. 
+
+
+
+
+  % \item Case ZZ: Suppose that $v=(0x1)$ and $w=(1y0)$. Suppose, for
+  %   the sake of contradiction, that there is no sequence of H/I
+  %   transformations that converts $v$ to $w$. Among all possible such
+  %   pairs $(v,w)$ choose one such that $\val w$ is smallest.
+
+  %   \textsc{This is where the new material will go.}
+
+
+  % \end{itemize}
   
 \end{proof}
 
