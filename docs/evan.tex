@@ -28,7 +28,7 @@
 
 \begin{center}
   \textsc{\large
-    Evan's Conjecture
+    Evan's Theorem
   }
 \end{center}
 
@@ -97,7 +97,7 @@ The interesting part is the converse.
   Let $v,w \in W_b$. We consider the first and last bits of both
   words, and break into cases. All told there are 16 possibilities:
   Four possibilities for $v$: $(0,\barv,0)$, $(0,\barv,1)$,
-  $(1,\barv,0)$, and $(1,\barv,1)$.  And likewise for $w$.
+  $(1,\barv,0)$, and $(1,\barv,1)$, and likewise for $w$.
 
 
   Cases as follows:
@@ -106,100 +106,73 @@ The interesting part is the converse.
   \item $v=(0,\barv,0)$ and $w=(0,\barw,0)$: Induction on
     $\barv\prec\barw$. 
 
-  \item $v=(0,\barv,0)$ and $w=(0,\barw,1)$: Cannot happen because 
-    $\rhov=(0,\rhobarv,0) \not\prec (1,\rhobarw,0) = \rhow$.
+  \item $v=(0,\barv,0)$ and $w=(0,\barw,1)$: Induction on
+    $(\barv,0)\prec(\barw,1)$. 
 
 
-  \item $v=(0,\barv,0)$ and $w=(1,\barw,0)$:
+  \item $v=(0,\barv,0)$ and $w=(1,\barw,0)$: Induction on
+    $(0,\barv)\prec(1,\barw)$. 
 
 
-  \item $v=(0,\barv,0)$ and $w=(1,\barw,1)$:
-
-    \newthought
-    
-  \item $v=(0,\barv,1)$ and $w=(0,\barw,0)$:
-
-
-  \item $v=(0,\barv,1)$ and $w=(0,\barw,1)$:
-
-
-  \item $v=(0,\barv,1)$ and $w=(1,\barw,0)$:
-
-
-  \item $v=(0,\barv,1)$ and $w=(1,\barw,1)$:
-
-    
-    \newthought
-
-  \item $v=(1,\barv,0)$ and $w=(0,\barw,0)$: 
-
-  \item $v=(1,\barv,0)$ and $w=(0,\barw,1)$: 
-
-  \item $v=(1,\barv,0)$ and $w=(1,\barw,0)$:
-
-  \item $v=(1,\barv,0)$ and $w=(1,\barw,1)$:
+  \item $v=(0,\barv,0)$ and $w=(1,\barw,1)$: Use I transformations to
+    go from $v=(0,\barv,0)$ to $(0,11\ldots1,0)$, then one H
+    transformation to $(1,00\ldots0,1)$, and then I transformations
+    to $w=(1,\barw,1)$.
 
     \newthought
     
-  \item $v=(1,\barv,1)$ and $w=(0,\barw,0)$:
+  \item $v=(0,\barv,1)$ and $w=(0,\barw,0)$: Contradiction: $\val\rho v >
+    \val\rho w$.
 
 
-  \item $v=(1,\barv,1)$ and $w=(0,\barw,1)$:
+  \item $v=(0,\barv,1)$ and $w=(0,\barw,1)$: Induction on
+    $(\barv,1)\prec(\barw,1)$. 
 
 
-  \item $v=(1,\barv,1)$ and $w=(1,\barw,0)$:
+  \item $v=(0,\barv,1)$ and $w=(1,\barw,0)$: Contradiction:
+    $\val\rho v > \val\rho w$. 
 
 
-  \item $v=(1,\barv,1)$ and $w=(1,\barw,1)$:
+  \item $v=(0,\barv,1)$ and $w=(1,\barw,1)$: Induction on
+    $(0,\barv)\prec(1,\barw)$. 
+
+    
+    \newthought
+
+  \item $v=(1,\barv,0)$ and $w=(0,\barw,0)$: Contradiction: $\val v >
+    \val w$. 
+
+  \item $v=(1,\barv,0)$ and $w=(0,\barw,1)$:  Contradiction: $\val v >
+    \val w$. 
+
+  \item $v=(1,\barv,0)$ and $w=(1,\barw,0)$: Induction on
+    $(1,\barv)\prec(1,\barw)$. 
+
+  \item $v=(1,\barv,0)$ and $w=(1,\barw,1)$: Induction on
+    $(1,\barv)\prec(1,\barw)$.
+
+    \newthought
+    
+  \item $v=(1,\barv,1)$ and $w=(0,\barw,0)$: Contradiction: $\val v >
+    \val w$.
+
+
+  \item $v=(1,\barv,1)$ and $w=(0,\barw,1)$: Contradiction: $\val v >
+    \val w$.
+
+
+  \item $v=(1,\barv,1)$ and $w=(1,\barw,0)$: Contradiction: $\val \rho
+    v > \val \rho w$.
+
+
+  \item $v=(1,\barv,1)$ and $w=(1,\barw,1)$: Induction on
+    $\barv\prec\barw$. \qedhere
 
 
 
 
 
   \end{enumerate}
-
-
-  % \textsf{OLD CASES}
- 
-
-
-  % \begin{itemize}
-  % \item Case I: Suppose that the first bits of $v$ and $w$ are the
-  %   same, and the last bits of $v$ and $w$ are the same. That is
-  %   $v=(s,\barv,t)$ and $w=(s,\barw,t)$ where
-  %   $s,t\in\{0,1\}$. [This covers 4 cases.]
-
-
-  %   It follows that $x\prec y$ in $W_{b-2}$ and therefore there is a
-  %   sequence of H/I transformations that convert $\barv$ to $\barw$
-  %   (by induction). The same sequence converts $v$ to $w$.
-
-    
-  % \item Case II: Suppose $v=(1,\barv,0)$ and $w=(0,\barw,t)$ with
-  %   $t\in\{0,1\}$. [2~cases] 
-
-  %   This cannot occur because it violates $v \prec w$. 
-
- 
-  % \item Case III: Suppose $v=(s,\barv,1)$ and $w=(1,\barw,0)$ with
-  %   $s\in\{0,1\}$. [2~cases]
-
-  %   This cannot occur because $\rho v = (1,\rho\barv,s)$ and
-  %   $w=(0,\rho\barw,1)$, violating $v \prec w$. 
-
-
-
-
-  % \item Case ZZ: Suppose that $v=(0x1)$ and $w=(1y0)$. Suppose, for
-  %   the sake of contradiction, that there is no sequence of H/I
-  %   transformations that converts $v$ to $w$. Among all possible such
-  %   pairs $(v,w)$ choose one such that $\val w$ is smallest.
-
-  %   \textsc{This is where the new material will go.}
-
-
-  % \end{itemize}
-  
 \end{proof}
 
 
