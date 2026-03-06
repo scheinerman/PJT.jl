@@ -1,0 +1,323 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{newtx}
+\usepackage[margin=1.25in]{geometry}
+
+\DeclareMathOperator{\val}{val}
+
+\newtheorem{conj}{Conjecture}
+\newtheorem{prop}[conj]{Proposition}
+\newtheorem{thm}[conj]{Theorem}
+\newtheorem{corr}[conj]{Corrolary}
+
+
+\newcommand{\two}{\textsc{two}}
+
+\newcommand{\barv}{\bar{v}}
+\newcommand{\barw}{\bar{w}}
+
+\newcommand{\rhov}{\rho v}
+\newcommand{\rhow}{\rho w}
+
+\newcommand{\rhobarv}{\rho \barv}
+\newcommand{\rhobarw}{\rho \barw}
+
+%\DeclareMathOperator{\weight}{wt}
+
+\newcommand{\weight}[1]{\mathrm{wt}(#1)}
+
+\newcommand{\newthought}{%
+  \smallskip\centerline{\rule{2in}{0.5pt}}\smallskip}
+
+\begin{document}
+
+\begin{center}
+  \textsc{\large Maximum Chains Paul's Poset }
+\end{center}
+
+\begin{itemize}
+\item For a positive integer $b$ let $W_b$ be the set of all
+  length-$b$ binary words.
+
+\item For $w \in W_b$, let $\val w$ be the integer represented in
+  binary by $w$; that is
+  \[
+  \val w = \sum_{i=1}^b w_i 2^{b-i} .
+  \]
+  For example, $\val (1,1,0,1) = 1101_{\textsc{two}} = 13$.
+
+\item For $w \in W_b$, let $\rho(w)$ be the \emph{reversal} of
+  $w$. That is $$\rho(d_1,d_2,\ldots,d_b) =
+  (d_b,d_{b-1},\ldots,d_1).$$
+
+\item For words $v,w\in W_b$, define $v \prec w$ provided $\val v <
+  \val w$ and $\val \rho(v) < \val \rho(w)$. Note that $(W_b,\prec)$
+  is a poset.
+
+\item A \emph{chain} is a subset of $W_b$ containing pairwise
+  comparable words.
+
+
+
+\item Let $c(b)$ be the size of a maximum chain in $W_b$, i.e., the
+  height of $W_b$.
+
+\end{itemize}
+
+\begin{thm}\label{thm:main}
+  For a positive integer $b$,
+  \[
+  c(b) = 
+  \begin{cases}
+    3\cdot 2^{b/2-1} & \text{if $b$ is even and} \\
+    2^{(b+1)/2} & \text{if $b$ is odd}.
+  \end{cases}
+  \]
+\end{thm}
+
+
+
+\begin{prop}[Chain lower bound]\label{prop:c-lower}
+    For a positive integer $b$,
+  \[
+  c(b) \ge
+  \begin{cases}
+    3\cdot 2^{b/2-1} & \text{if $b$ is even and} \\
+    2^{(b+1)/2} & \text{if $b$ is odd}.
+  \end{cases}
+  \]
+\end{prop}
+
+\begin{proof}
+  Observe that if $w_1\prec w_2 \prec \cdots \prec w_n$ is a chain in $W_b$, then 
+  $$
+  0w_10 \prec 0w_20 \prec \cdots \prec 0w_n0 \prec 1w_11\prec
+  1w_21\prec \cdots \prec 1w_n1
+  $$ is a chain
+  in $W_{b+2}$ that is twice as long.
+
+  We see that $c(1)=2$ because $0\prec1$ is a chain in $W_1$ and that
+  $c(2)=3$ because $00\prec01\prec11$ is a chain in $W_2$ (and easy to
+  check we cannot make a longer one).
+
+  The result now follows by induction on $b$. 
+\end{proof}
+
+
+\begin{proof}[Alternative proof sketch for odd $b$]
+  The palindromes of $W_b$ form a chain. When $b$ is odd, the number
+  of palindromes is $2^{(b+1)/2}$. This argument doesn't work for
+  even $b$.
+\end{proof}
+
+\bigbreak
+\noindent\textbf{I and H transformations}
+
+\begin{itemize}
+\item A \emph{type I} transformation replaces a $0$ in $v$ with a $1$.
+
+  Example: $001\underline0 101 \to 001 \underline1 101$. 
+
+\item A \emph{type H} transformation replaces a substring in $v$ of
+  the form\footnote{The substring begins and ends with a $0$ and has
+    one or more consecutive $1$s in between.}  $011\dots10$ with its
+  complement, i.e., $100\ldots01$.
+
+  Example: $0\underline{0110}01 \to 0 \underline{1001} 01$.
+\end{itemize}
+
+\begin{prop}
+  Suppose $v,w\in W_b$ and $w$ is derived from $v$ by an I
+  transformation, than $v \prec w$.
+\end{prop}
+
+
+\begin{proof}
+  Let $v=(x,0,y)$ and $w=(x,1,y)$. Then $\val w = \val v + 2^k > \val
+  v$ for some $k$. Likewise, $\val\rho w = \val\rho v + 2^j > \val\rho
+  v$ for some $j$. Therefore $v \prec w$.
+\end{proof}
+
+
+
+\begin{corr}
+  Let $v,w \in W_b$. If $w$ is obtained from $v$ by a series of I and
+  H transformations, then $v\preceq w$. \qed
+\end{corr}
+
+The interesting part is the converse.
+
+
+\begin{prop}\label{prop:HI}
+  Let $v,w \in W_b$ with $v \prec w$. Then $w$ is obtained from $v$
+  by a sequence of I and H transformations. 
+\end{prop}
+
+\begin{proof}
+  The proof is by strong induction on $b$. It is easy to verify for
+  $W_1$, $W_2$, and $W_3$. Suppose the result has been shown for all
+  $W_i$ with $i<b$. 
+
+  Let $v,w \in W_b$. We consider the first and last bits of both
+  words, and break into cases. All told there are 16 possibilities:
+  Four possibilities for $v$: $(0,\barv,0)$, $(0,\barv,1)$,
+  $(1,\barv,0)$, and $(1,\barv,1)$, and likewise for $w$.
+
+
+  Cases as follows:
+
+  \begin{enumerate}
+  \item $v=(0,\barv,0)$ and $w=(0,\barw,0)$: Induction on
+    $\barv\prec\barw$. 
+
+  \item $v=(0,\barv,0)$ and $w=(0,\barw,1)$: Induction on
+    $(\barv,0)\prec(\barw,1)$. 
+
+
+  \item $v=(0,\barv,0)$ and $w=(1,\barw,0)$: Induction on
+    $(0,\barv)\prec(1,\barw)$. 
+
+
+  \item $v=(0,\barv,0)$ and $w=(1,\barw,1)$: Use I transformations to
+    go from $v=(0,\barv,0)$ to $(0,11\ldots1,0)$, then one H
+    transformation to $(1,00\ldots0,1)$, and then I transformations
+    to $w=(1,\barw,1)$.
+
+    \newthought
+    
+  \item $v=(0,\barv,1)$ and $w=(0,\barw,0)$: Contradiction: $\val\rho v >
+    \val\rho w$.
+
+
+  \item $v=(0,\barv,1)$ and $w=(0,\barw,1)$: Induction on
+    $(\barv,1)\prec(\barw,1)$. 
+
+
+  \item $v=(0,\barv,1)$ and $w=(1,\barw,0)$: Contradiction:
+    $\val\rho v > \val\rho w$. 
+
+
+  \item $v=(0,\barv,1)$ and $w=(1,\barw,1)$: Induction on
+    $(0,\barv)\prec(1,\barw)$. 
+
+    
+    \newthought
+
+  \item $v=(1,\barv,0)$ and $w=(0,\barw,0)$: Contradiction: $\val v >
+    \val w$. 
+
+  \item $v=(1,\barv,0)$ and $w=(0,\barw,1)$:  Contradiction: $\val v >
+    \val w$. 
+
+  \item $v=(1,\barv,0)$ and $w=(1,\barw,0)$: Induction on
+    $(1,\barv)\prec(1,\barw)$. 
+
+  \item $v=(1,\barv,0)$ and $w=(1,\barw,1)$: Induction on
+    $(1,\barv)\prec(1,\barw)$.
+
+    \newthought
+    
+  \item $v=(1,\barv,1)$ and $w=(0,\barw,0)$: Contradiction: $\val v >
+    \val w$.
+
+
+  \item $v=(1,\barv,1)$ and $w=(0,\barw,1)$: Contradiction: $\val v >
+    \val w$.
+
+
+  \item $v=(1,\barv,1)$ and $w=(1,\barw,0)$: Contradiction: $\val \rho
+    v > \val \rho w$.
+
+
+  \item $v=(1,\barv,1)$ and $w=(1,\barw,1)$: Induction on
+    $\barv\prec\barw$. \qedhere
+
+  \end{enumerate}
+\end{proof}
+
+
+
+Recall that, in a poset, $v$ is \emph{covered by} $w$ provided $v
+\prec w$ and there is no element $x$ with $v \prec x \prec w$. 
+
+
+\begin{corr}
+  For $v,w \in W_b$, $v$ is covered by $w$ if and only if $w$ is
+  obtained from $v$ by a type I or type H transformation.\qed
+\end{corr}
+
+In particular, if $w_1 \prec w_2 \prec \cdots \prec w_t$ is a maximum
+chain in $W_b$, then each $w_{i+1}$ is obtained from $w_i$ by a type~I
+or a type~H transformation. 
+
+
+\bigbreak
+\noindent\textbf{Weighting function}
+
+For a binary word $v$ we define an indexing system and a weighting
+function $\weight v$ as follows.
+
+We index the entries of words from their middle outwards. 
+\begin{itemize}
+\item If $v$ has odd length ($b=2k+1$) the middle bit is index
+  $0$. Bits to the left are indexed $-1,-2,\ldots,-k$ and bits to the
+  right are indexed $1,2,\ldots k$.
+
+\item If $v$ has even length ($b=2k$) the bits are index (from left to
+  right) as $-k,-(k-1), \ldots,-1,1,2,\ldots,k-1,k$. There is no index
+  $0$. 
+\end{itemize}
+
+We associate a weight with each index.
+\begin{itemize}
+\item If $v$ has odd length, the middle three bits have weight
+  $1$; these are the entries at indices $-1,0,1$. 
+
+  Moving outwards, the bits at index $\pm j$ (where $j>1$) have weight
+  $2^{j-1}$. 
+
+  For example, for a $9$-bit word, the weights (from left to right)
+  are $8,4,2,1,1,1,2,4,8$.
+
+\item If $v$ has even length, the middle two bits (at indices $\pm1$)
+  have weight $\frac32$. Moving outwards, the bits at index $\pm j$
+  (where $j>1$) are $\frac32\cdot2^{j-1}$. 
+
+  For example, for an $8$-bit word, the weights (from left to right)
+  are $12,6,3,\frac32,\frac32,3,6,12$.
+\end{itemize}
+
+We define the weight of a word $v$ to be the sum of the weights
+associated with the 1s in $v$. Think of this as the dot product of the
+list of weights and the list of digits. 
+
+
+Examples:
+\[
+\begin{aligned}
+  \weight{110101110} =& [8,4,2,1,1,1,2,4,8]\cdot \\
+  &[1,1,0,1,0,1,1,1,0] 
+  = 8+4+1+1+1+2+4 = 21 
+  \\[6pt]
+  \weight{110101} =& [1,1,0,1,0,1] \cdot\\
+  &[6,3,\tfrac32,\tfrac32,3,6] = 6 + 3 + \frac32 + 6 = 16.5
+\end{aligned}
+\]
+
+\begin{prop}\label{prop:wt+1}
+  If $w$ is obtained from $v$ by an I or H transformation, then 
+  $\weight w \ge \weight v + 1$.
+\end{prop}
+
+\begin{proof}
+  If $w$ is obtained from $v$ by an I transformation, then some bit of
+  $v$ is changed from a $0$ to a $1$, and all other bits are
+  unchanged. Since all weights are at least $1$, we have 
+  $\weight w \ge \weight v + 1$.
+
+  Suppose $w$ is obtained from $v$ by an H transformation.
+\end{proof}
+
+
+\end{document}
