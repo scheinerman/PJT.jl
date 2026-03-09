@@ -2,7 +2,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{newtx}
-\usepackage[margin=1.25in]{geometry}
+\usepackage[margin=1.5in]{geometry}
 
 \DeclareMathOperator{\val}{val}
 
@@ -33,7 +33,7 @@
 \begin{document}
 
 \begin{center}
-  \textsc{\large Maximum Chains Paul's Poset }
+  \textsc{\large Maximum Chains in Paul's Poset }
 \end{center}
 
 \begin{itemize}
@@ -139,11 +139,33 @@
   v$ for some $j$. Therefore $v \prec w$.
 \end{proof}
 
+\begin{prop}
+  Suppose $v,w\in W_b$ and $w$ is derived from $v$ by an H
+  transformation, than $v \prec w$.
+\end{prop}
+
+\begin{proof}
+  We show that an H-transform increases the numerical value of a
+  word. Since H-transforms are symmetrical, it also increases the
+  value of the word's reversa
+
+  Suppose that the $011\dots10$ pattern  has its first $0$ in the $2^a$
+  column and the last $0$ is in the $2^b$ column (where $a>b$)
+
+  The H-transform increases the value of the word by $2^b+2^a$ and
+  decreases its value by $2^{b+1} + 2^{b+2} + \cdots + 2^{a-1}$ which
+  equals $2^a - 2^{b+1}$, so the net change is
+  \[
+  \left(2^a+2^b\right) - \left(2^a - 2^{b+1}\right) = 2^b + 2^{b+1}
+  \]
+  which is positive. 
+\end{proof}
+
 
 
 \begin{corr}
-  Let $v,w \in W_b$. If $w$ is obtained from $v$ by a series of I and
-  H transformations, then $v\preceq w$. \qed
+  Let $v,w \in W_b$. If $w$ is obtained from $v$ by a series of one or
+  more I and H transformations, then $v\prec w$. \qed
 \end{corr}
 
 The interesting part is the converse.
@@ -281,11 +303,11 @@ We associate a weight with each index.
   are $8,4,2,1,1,1,2,4,8$.
 
 \item If $v$ has even length, the middle two bits (at indices $\pm1$)
-  have weight $\frac32$. Moving outwards, the bits at index $\pm j$
-  (where $j>1$) are $\frac32\cdot2^{j-1}$. 
+  have weight $1$. Moving outwards, the bits at index $\pm j$
+  (where $j>1$) have weight $\frac32\cdot2^{j-2}$. 
 
   For example, for an $8$-bit word, the weights (from left to right)
-  are $12,6,3,\frac32,\frac32,3,6,12$.
+  are $6,3,\frac32,1,1,\frac32,3,6$.
 \end{itemize}
 
 We define the weight of a word $v$ to be the sum of the weights
@@ -301,7 +323,7 @@ Examples:
   = 8+4+1+1+1+2+4 = 21 
   \\[6pt]
   \weight{110101} =& [1,1,0,1,0,1] \cdot\\
-  &[6,3,\tfrac32,\tfrac32,3,6] = 6 + 3 + \frac32 + 6 = 16.5
+  &[3,\tfrac32,1,1,\tfrac32,3] = 3 + \tfrac32 + 1 + 3 = 8.5
 \end{aligned}
 \]
 
@@ -316,7 +338,285 @@ Examples:
   unchanged. Since all weights are at least $1$, we have 
   $\weight w \ge \weight v + 1$.
 
-  Suppose $w$ is obtained from $v$ by an H transformation.
+  Suppose $w$ is obtained from $v$ by an H transformation. 
+
+  \bigbreak
+
+  \noindent\textbf{Case I:} $b$ is odd. 
+
+  We consider the locations of the ends of the H in $v$, i.e., the
+  zeros in the pattern 011\ldots10.
+
+  \begin{itemize}
+  \item \emph{The two zeros do not surround the center (index $0$) bit.}
+    We assume that the 0s are located at indices $a$ and $b$ with
+    $0<a<a+1<b$ (therefore $b-1>a$).
+
+
+    The addition to the weight is $2^{a-1}+2^{b-1}$. The subtraction
+    is $2^a+2^{a+1}+\cdots+2^{b-2}$ which equals
+    \[
+    2^a\left(1+2+\cdots+2^{b-a-2}\right) = 2^a(2^{b-a-1}-1) = 
+    2^{b-1} - 2^a .
+    \]
+    Thee net change in weight is 
+    \[
+    \left(2^{a-1}+2^{b-1}\right) -\left(2^{b-1}-2^a\right) =
+    2^{a-1}+2^a > 1.
+    \]
+
+
+    \item \emph{One of the zeros is at index $0$ and the other is at
+        index $a$}. We may assume $a\ge2$. 
+
+      Addition to the weight is $1 + 2^{a-1}$. Subtraction is
+      $1+2+\cdots+2^{a-2}  = 2^{a-1}-1$. 
+      
+      The net change in weight is 
+      \[
+      \left(1+2^{a-1}\right) - \left( 2^{a-1}-1 \right) = 2 > 1.
+      \]
+
+    \item \emph{One of the zeros is at index $-1$ and the other is at
+        index $a\ge1$}. 
+      
+      Addition to the weight is $1+2^{a-1}$.  Subtraction from the
+      weight is 
+      \[
+      1 + \left(1+2+\cdots+2^{a-2}\right) = 1 + \left(2^{a-1}-1\right)
+      = 2^{a-1}.
+      \]
+      The net change in weight is $1+2^{a-1}-2^{a-1}=1$. 
+
+      \bigbreak
+      We have consider the cases where the H configuration does not
+      overlap the center, has the center as an end point, or overlaps
+      the center with one end immediately next to center. 
+
+    \item \emph{One of the zeros is to the left of center and the
+        other is to the right of center, with neither next to the
+        center.} We may assume that the zeros are at indices $-a$ and
+      $b$, where $a,b\ge2$.
+
+      Addition to the weight is $2^{a-1}+2^{b-1}$. Subtraction from
+      the weight is
+      \[
+      \underbrace{
+        \left(1+2+\cdots+2^{a-2}
+        \right)
+      }_{\text{left of center}} + 1 + 
+      \underbrace{
+        \left(1+2+\cdots+2^{b-2}
+        \right)
+      }_{\text{right of center}}
+      \]
+      which equals 
+      \[
+      \left(2^{a-1}-1 \right) + 1 + \left(2^{b-1}-1\right) = 2^{a-1}+2^{b-1}-1.
+      \]
+
+      The net change in weight is $\left(2^{a-1}+2^{b-1}\right) - 
+      \left(2^{a-1}+2^{b-1}\right) = 1$. 
+  \end{itemize}
+
+  
+  
+
+  \noindent\textbf{Case II:} $b$ is even.
+
+  As before, we consider the location of the 0s in the H configuration
+  01\ldots10. 
+
+  \begin{itemize}
+  \item \emph{The H configuration does not include either middle bit.}
+    That is, the two 0s are at indices $a$ and $b$ with $1<a<a+1<b$. 
+
+    Addition to the weight: $\frac32\cdot 2^{a-2}+ \frac32\cdot
+    2^{b-2}=\frac32(2^{a-2}+2^{b-2})$. 
+
+    Subtraction from the weight:
+    \[
+    \begin{aligned}
+      \frac32\left(2^{a-1}+\cdots+2^{b-3}\right) &=
+      \frac32\cdot2^{a-1}\left(1+\cdots+2^{b-a-2}\right) \\
+      &=
+      \frac32\cdot 2^{a-1}\left(2^{b-a-1}-1\right) \\
+      &=
+      \frac32\left(2^{b-2}-2^{a-1}\right)
+    \end{aligned}
+    \]
+
+    Net addition to weight is
+    \[
+    \frac32\left(2^{a-2}+2^{b-2}\right)
+    - 
+    \frac32\left(2^{b-2}-2^{a-1}\right) = 
+    \frac32\left(2^{a-2}+2^{a-1}\right)
+    > 1.
+    \]
+
+  \item \emph{One of the zeros is a middle bit of the word and the
+      other zero is on the same side of the middle.}  
+
+    That is, the zeros are at index 1 and $a$ where $a>2$.
+
+    Addition: $1 + \frac32\cdot 2^{a-2}$. 
+
+    Subtraction:
+    \[
+    \frac32\left(1 + \cdots + 2^{a-3}\right) 
+    =\frac32\left( 2^{a-2}-1 \right)
+    \]
+
+    Net change:
+    \[
+    \left(1 + \frac32\cdot 2^{a-2} \right) - \frac32\left( 2^{a-2}-1
+    \right) = \frac52 > 1. 
+    \]
+
+
+  \item \emph{One of the zeros is at index $-1$ and the other is at
+      index $a>1$.} 
+
+    Addition: $1 + \frac32\cdot 2^{a-2}$. 
+
+    Subtraction: 
+
+    If $a=2$, the subtraction is $\frac32$ and the net change is
+    $(1+\frac32)-\frac32=1$.  
+
+    
+    If $a>2$, subtraction is
+    \[
+    1 + \frac32\left(1 + \cdots + 2^{a-3}\right) = 1 + \frac32\left(
+      2^{a-2}-1 \right)
+    \]
+
+    Net change:
+    \[
+    \left(1 + \frac32\cdot 2^{a-2} \right) - 
+    \left[ 1 + \frac32\left(
+      2^{a-2}-1 \right) \right] = \frac32 > 1. 
+    \]
+
+  \item \emph{One of the zeros is at $-a$ and the other is at $b$ with
+      $a,b>1$.}
+
+    Addition to weight: $\frac32\cdot2^{a-2} + \frac32\cdot2^{b-2} =
+    \frac32\left(2^{a-2}+2^{b-2}\right)$. 
+
+    \begin{itemize}
+    \item If $a=b=2$: Addition becomes $\frac32 + \frac32$.
+      Subtraction is $1+1=2$. Net is $3-2=1$.
+
+
+    \item If $a>2$ and $b=2$: Addition becomes
+      $\frac32\cdot2^{a-2}+\frac32$. 
+
+      On the left, subtraction is 
+      \[
+      1 + \frac32\left(1+ \cdots + 2^{a-3}\right) = 
+      1 +\frac32\left(2^{a-2}-1\right)
+      \]
+      On the right, the subtraction is $1$. Complete subtraction is
+      \[
+      2+\frac32\left(2^{a-2}-1\right) = \frac12 + \frac32\cdot2^{a-2}.
+      \]
+      
+      Therefore net change to weight is 
+      \[
+      \left( \frac32\cdot2^{a-2}+\frac32 \right) - 
+      \left( \frac12 + \frac32\cdot2^{a-2} \right) = 1.
+      \]
+
+    \item If $a=2$ and $b>2$: Same as previous case.
+
+    \item If $a>2$ and $b>2$:
+
+
+    Subtraction from the weight. We have $1+1$ in the middle.
+    On the left, the weights in positions $2$ through $a-1$ are
+    $\frac32, \frac32\cdot2, \ldots, \frac32 \cdot2^{a-3}$ and
+    likewise on the right. Total subtraction is
+    \[
+    \frac32\left(1+2+\cdots+2^{a-3}\right) + 1 + 1 +
+    \frac32\left(1+2+\cdots+2^{b-3}\right)
+    \]
+    which equals
+    \[
+    \frac32\left((2^{a-2}-1)  + (2^{b-2}-1)\right) + 2 
+    =
+    \frac32\left(2^{a-2} + 2^{b-2}\right) -1 .
+    \]
+    Therefore, net change to weight is
+    \[
+    \frac32\left(2^{a-2}+2^{b-2}\right) - \left[
+      \frac32\left(2^{a-2} + 2^{b-2}\right) -1 
+    \right] = 1.
+    \]
+    \end{itemize}
+    
+
+  \end{itemize}
+
+  In all cases, an H or an I transform applied to a word increases the
+  weight of the word by at least $1$.
+\end{proof}
+
+
+\begin{prop}
+  In $W_b$ we have
+  \[
+  \weight{111\ldots1} =  
+  \begin{cases}
+    3\cdot 2^{b/2-1}-1 & \text{if $b$ is even and} \\
+    2^{(b+1)/2}-1 & \text{if $b$ is odd}.
+  \end{cases}
+  \]
+\end{prop}
+
+\begin{proof}
+  If $b$ is even, let $k=b/2$. The weight of the all 1s word is
+  \[
+  \left(3\cdot 2^{k-2} + 3\cdot 2^{k-3} + \cdots + \frac32\right) + 1 
+  + 
+  1 + \left( \frac32 + \cdots + 3\cdot 2^{k-3} + 3\cdot 2^{k-2}\right)
+  \]
+  which equals 
+  \[
+  \begin{aligned}
+    2\cdot3\cdot(2^{k-2} + \cdots +2+ 1 + \tfrac12) + 2    
+    &= 3 \cdot(2^{k-1} + \cdots + 1) + 2 \\
+    &= 3 \cdot (2^{k} -1) + 2 \\
+    &= 3 \cdot 2^{b/2} - 1.
+  \end{aligned}
+  \]
+
+  If $b$ is odd, let $b=2k+1$. The weight of the all 1s word is
+  \[
+  \left(2^{k-1}+2^{k-2}+\cdots+1\right) + 1 + 
+  \left(1 + 2 + \cdots + 2^{k-2}+2^{k-1}\right)
+  \]
+  which equals $2\cdot(2^k-1) + 1 = 2^{k+1}-1 = 2^{(b+1)/2}-1$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+  For a positive integer $b$ let
+  \[
+  f(b) =
+  \begin{cases}
+    3\cdot 2^{b/2-1} & \text{if $b$ is even and} \\
+    2^{(b+1)/2} & \text{if $b$ is odd}.
+  \end{cases}
+  \]
+
+  By Proposition~\ref{prop:c-lower}, $c(b)\ge f(b)$. 
+
+  The cardinaltiy of a maximum chain in $W_b$ cannot be larger $f(b)$
+  since the lowest possible weight of a word is $0$ (for the all zeros
+  word) and the maximum possible weight is $f(b)-1$ (for the all ones
+  word) and for each pair of sequential elements $v \prec w$ in any
+  chain the $\weight{w}\ge\weight{v}+1$. 
 \end{proof}
 
 
