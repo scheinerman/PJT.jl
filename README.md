@@ -157,3 +157,7 @@ julia> flip.(reverse(anti))
 julia> ans == anti
 true
 ```
+
+# Evan's Weight Function
+
+Use `weight(w)` to return the weight of the word `w`.

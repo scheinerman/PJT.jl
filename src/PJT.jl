@@ -8,7 +8,7 @@ export word_gen, flip_word_gen
 export max_chain, max_antichain, height, width
 export is_chain, is_antichain
 export recursive_chain, palindromes, middle, xor
-export binary_string
+export binary_string, weight
 
 
 export conj_a, conj_c
@@ -337,4 +337,6 @@ function xor(v::Word, w::Word)::Word
 	return Word(b,x)
 end
 
+
+include("weights.jl")
 end # end module PJT

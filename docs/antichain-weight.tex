@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{newtx}
+\usepackage[margin=1.5in]{geometry}
+
+\DeclareMathOperator{\val}{val}
+\newcommand{\two}{\textsc{two}}
+
+\newcommand{\barv}{\bar{v}}
+\newcommand{\barw}{\bar{w}}
+
+\newcommand{\rhov}{\rho v}
+\newcommand{\rhow}{\rho w}
+
+\newcommand{\rhobarv}{\rho \barv}
+\newcommand{\rhobarw}{\rho \barw}
+
+\newtheorem{conj}{Conjecture}
+\newtheorem{corr}[conj]{Corrolary}
+\newtheorem{prop}[conj]{Proposition}
+\newtheorem{thm}[conj]{Theorem}
+
+\newcommand{\newthought}{%
+  \smallskip\centerline{\rule{2in}{0.5pt}}\smallskip}
+
+\begin{document}
+
+\begin{center}
+  \textsc{\large
+    Antichain Lower Bound Conjecture
+  }
+\end{center}
+
+\begin{itemize}
+\item $b=4$. Conjectured width is 5.  There are 4 words
+  of weight 2.5 and 1 word of weight 2 (also 3). This gives a max antichain.
+
+
+\item $b=5$. Conjectured width is 7.  There are 7 words of weight 3
+  (also 4). 
+
+\item $b=6$. Conjectured width is 11. There are 8 words of weight $11/2$
+  and 3 words of weight $11$ (also $12$).
+
+\item $b=7$. Conjectured width is 15. There are 15 words of weight 7
+  (also 8). 
+
+\item $b=8$. Conjectured width is 23. There are 16 words of weight
+  $23/2$ and 7 words of weight 11 (also 12).
+
+\item $b=9$. Conjectured width is 31. There are 31 words of weight 15
+  (also 16).
+
+\item $b=10$. Conjectured width is 47. There are 32 words of weigth
+  $47/2$ and 15 of weight 23 (also 24). 
+\end{itemize}
+
+
+
+Let 
+\[
+c(b) = 
+\begin{cases}
+  3\cdot 2^{b/2-1} & \text{if $b$ is even and} \\
+  2^{(b+1)/2} & \text{if $b$ is odd}.
+\end{cases}
+\]
+
+
+\begin{conj}
+  If $b$ is odd, there is an antichain of size $c(b)-1$
+  consisting of those words with weight $c(b)/2$ (also with weight $c(b)/2-1$).
+\end{conj}
+
+\begin{conj}
+  If $b$ is even, there is an antichain of size
+  $c(b)-1$ made up of those words of weight $[c(b)-1]/2$ together with
+  those of weight $c(b)/2$ (or with weight $c(b)=c(b)/2-1$).
+
+  The number with weight $[c(b)-1]/2$ is $2^{b/2}$ and the number with
+  weight $c(b)/2\pm1$ is $2^{b/2-1}-1$. 
+\end{conj}
+
+\end{document}
+
